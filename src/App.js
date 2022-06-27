@@ -74,13 +74,14 @@ const App = () => {
         } else if(key === "=") {
             // console.log("Enter");
             if(!expression) return; //not expresion then return
+            if(expression==="0") return; //if only 0 then dont add to history
             calculateResult(expression);
 
             // add item to history on pressing enter
 			var tempHistory = [...history];
-            if(history.length > 10) {
-				tempHistory = tempHistory.slice(0, 1);
-            }
+            // only allow to store 10 previous expressions in history
+            if(history.length > 9) tempHistory.splice(0, 1);
+            
 			tempHistory.push(expression);
 			setHistory(tempHistory);
 
