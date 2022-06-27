@@ -37,7 +37,8 @@ const App = () => {
         if(numbers.includes(key)) {
             // console.log("Number");
             if(key==="0") {
-                if(expression.length===0) return;
+                // dont allow user to press more than 1 zero in beginning
+                if(expression.length===1) return;
             }
             calculateResult(expression + key);
             setExpression(expression + key);
@@ -77,7 +78,7 @@ const App = () => {
 
             // add item to history on pressing enter
 			var tempHistory = [...history];
-            if(history.length > 20) {
+            if(history.length > 10) {
 				tempHistory = tempHistory.slice(0, 1);
             }
 			tempHistory.push(expression);
