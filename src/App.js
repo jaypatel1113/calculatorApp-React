@@ -12,10 +12,10 @@ const App = () => {
     const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     const operators =["-", "+", "*", "/"];
 
-    const [isDarkMode, setIsDarkMode] = useState(JSON.parse(localStorage.getItem("calculator_app_mode")) || false);
-    const [expression, setExpression] = useState("");
-    const [result, setResult] = useState("");
-    const [history, setHistory] = useState(JSON.parse(localStorage.getItem("calculator_app_history")) || []);
+    var [isDarkMode, setIsDarkMode] = useState(JSON.parse(localStorage.getItem("calculator_app_mode")) || false);
+    var [expression, setExpression] = useState("");
+    var [result, setResult] = useState("");
+    var [history, setHistory] = useState(JSON.parse(localStorage.getItem("calculator_app_history")) || []);
 
 	// auto clear localStorage after 1 days
 	var day = 1;
@@ -74,8 +74,14 @@ const App = () => {
         } else if(key === "=") {
             // console.log("Enter");
             if(!expression) return; //not expresion then return
-            if(expression==="0") return; //if only 0 then dont add to history
             calculateResult(expression);
+
+            // checks if last chaar is operator or dot
+            const lastChar = expression.slice(-1);
+            
+            // if last is . and therer is not operator in exp then remove last char and to history
+            if(lastChar === '.' || operators.includes(lastChar)) expression=expression.slice(0, -1);
+
 
             // add item to history on pressing enter
 			var tempHistory = [...history];
