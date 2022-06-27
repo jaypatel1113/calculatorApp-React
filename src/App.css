@@ -1,38 +1,110 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300&family=Bitter:wght@500&family=DM+Serif+Display&family=Varela+Round&display=swap');
+/* lightmode color */
+.app {
+    --bg-color-1: #ddf0ff;
+    --bg-color-2: #f9f9f9;
+    --text-color-1: #0b1537;
+    --text-color-2: #636363;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* darkmode color */
+.app[data-theme = "dark"] {
+    --bg-color-1: #172d67;
+    --bg-color-2: #050c26;
+    --text-color-1: #fbfcfc;
+    --text-color-2: #bbbcbc;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.custom_scroll::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+.custom_scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom_scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.14);
+    border-radius: 15px;
+}
+.custom_scroll::-webkit-scrollbar-thumb:hover {
+    background: gray;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* for firefox */
+.custom_scroll {
+    scrollbar-color: rgba(0, 0, 0, 0.14) transparent;
+    scrollbar-width: thin;    
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+* {
+    transition: all 0.3s linear;
+    user-select: none;
+}
+.app {
+    background: #add8e6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app_active {
+    background: #31488d;
+}
+.app_calculator {
+    height: 450px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 5px -5px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.app_calculator_navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    min-height: 30px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.app_calculator_navbar img {
+    height: 24px;
+    width: 24px;
+}
+.app_calculator_navbar_toggle {
+    height: 20px;
+    width: 40px;
+    background: transparent;
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 2px 10px rgba(129, 149, 216, 0.5),
+                inset -1px -1px 2px 10px rgba(182, 192, 224, 0.5);
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+.app_calculator_navbar_toggle_circle {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #f00;
+    transform: scale(0.5);
+    transition: all 0.3s ease-in;
+    box-shadow: 0 0 5px #f00,
+                0 0 10px #f00,
+                0 0 20px #f00;
+}
+.app_calculator_navbar_toggle_circle_active {
+    margin-left: 20px;
+    background: #0f0;
+    box-shadow: 0 0 5px #0f0,
+                0 0 10px #0f0,
+                0 0 20px #0f0,
+                0 0 40px #0f0;
+
 }
