@@ -9,8 +9,10 @@
 
 /* darkmode color */
 .app[data-theme = "dark"] {
-    --bg-color-1: #172d67;
-    --bg-color-2: #050c26;
+    /* --bg-color-1: #172d67; */
+    --bg-color-1: #333;
+    /* --bg-color-2: #050c26; */
+    --bg-color-2: #111;
     --text-color-1: #fbfcfc;
     --text-color-2: #bbbcbc;
 }
@@ -50,7 +52,8 @@
     align-items: center;
 }
 .app_active {
-    background: #31488d;
+    /* background: #31488d; */
+    background: #222;
 }
 .app_calculator {
     height: 450px;
@@ -61,6 +64,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    animation: calc 1s ease-in 0.0000001s;
 }
 .app_calculator_navbar {
     position: absolute;
@@ -83,10 +87,14 @@
     width: 40px;
     background: transparent;
     border-radius: 20px;
-    box-shadow: inset 1px 1px 2px 10px rgba(129, 149, 216, 0.5),
-                inset -1px -1px 2px 10px rgba(182, 192, 224, 0.5);
+    box-shadow: inset 1px 1px 2px 10px rgba(173, 216, 230, 0.5),
+                inset -1px -1px 2px 10px rgba(173, 216, 230, 0.5);
     transition: all 0.3s ease-in;
     cursor: pointer;
+}
+.app_active .app_calculator_navbar_toggle {
+    box-shadow: inset 1px 1px 2px 10px rgba(34, 34, 34, 0.5),
+                inset -1px -1px 2px 10px rgba(34, 34, 34, 0.5);
 }
 .app_calculator_navbar_toggle_circle {
     height: 20px;
@@ -107,4 +115,27 @@
                 0 0 20px #0f0,
                 0 0 40px #0f0;
 
+}
+.spinAnim {
+    animation: loading 3s ease-in;
+}
+@keyframes loading {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+@keyframes calc {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import RingLoader from "react-spinners/RingLoader";
 
 import Header from "./Components/Header/Header";
 import KeyPad from "./Components/KeyPad/KeyPad";
@@ -16,6 +17,7 @@ const App = () => {
     var [expression, setExpression] = useState("");
     var [result, setResult] = useState("");
     var [history, setHistory] = useState(JSON.parse(localStorage.getItem("calculator_app_history")) || []);
+    var [isLoading, setIsLoading] = useState(false);
 
 	// auto clear localStorage after 1 days
 	var day = 1;
@@ -120,23 +122,39 @@ const App = () => {
 		localStorage.setItem("calculator_app_history", JSON.stringify(history));
 	}, [history]);
 
+    // for pre loading
+    useEffect( ()=> {
+        setIsLoading(true);
+        setTimeout( ()=> {
+            setIsLoading(false);
+        }, 2500);
+    }, []);
+
+
 
     return ( 
         <div className={` app ${ isDarkMode ? "app_active" : "" } `} data-theme={ isDarkMode ? "dark" : "" }>
-            <div className="app_calculator">
-                <div className="app_calculator_navbar">
-                    <div className="app_calculator_navbar_toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
-                        <div
-                            className={ `app_calculator_navbar_toggle_circle ${ isDarkMode ? "app_calculator_navbar_toggle_circle_active" : "" }` }
-                        ></div>
+
+            {
+                isLoading ? <RingLoader color={"#0071FF"} loading={isLoading} size={130} className="spinAnim" /> : 
+                (
+                    <div className="app_calculator">
+                        <div className="app_calculator_navbar">
+                            <div className={` app_calculator_navbar_toggle ${ isDarkMode ? "app_calculator_navbar_toggle_active" : "" } `} onClick={() => setIsDarkMode(!isDarkMode)}>
+                                <div
+                                    className={ `app_calculator_navbar_toggle_circle ${ isDarkMode ? "app_calculator_navbar_toggle_circle_active" : "" }` }
+                                ></div>
+                            </div>
+
+                            {/* <img src={isDarkMode ? Moon : Sun} alt="mode" /> */}
+                        </div>
+
+                        <Header expression={expression} result={result} history={history} />
+                        <KeyPad handleKeypress={handleKeypress} />
                     </div>
-
-                    {/* <img src={isDarkMode ? Moon : Sun} alt="mode" /> */}
-                </div>
-
-                <Header expression={expression} result={result} history={history} />
-                <KeyPad handleKeypress={handleKeypress} />
-            </div>
+                )
+            }
+            
         </div>
     );
 };
